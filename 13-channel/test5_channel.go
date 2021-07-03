@@ -9,8 +9,7 @@ func fibonacii(c, quit chan int) {
 		select {
 		case c <- x:
 			//如果c可写，则该case就会进来
-			x = y
-			y = x + y
+			x, y = y, x+y
 		case <-quit:
 			fmt.Println("quit")
 			return

@@ -7,9 +7,9 @@ func main() {
 
 	//声明myMap1是一种map类型 key是string， value是string
 	var myMap1 map[string]string
-	if myMap1 == nil {
-		fmt.Println("myMap1 是一个空map")
-	}
+	//if myMap1 == nil {
+	//	fmt.Println("myMap1 是一个空map")
+	//}
 
 	//在使用map前， 需要先用make给map分配数据空间
 	myMap1 = make(map[string]string, 10)
@@ -35,4 +35,8 @@ func main() {
 		"three": "python",
 	}
 	fmt.Println(myMap3)
+
+	for key, value := range myMap3 {
+		fmt.Println("key = ", key, ", value = ", value)
+	}
 }
