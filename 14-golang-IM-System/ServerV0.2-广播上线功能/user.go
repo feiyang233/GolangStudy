@@ -26,7 +26,7 @@ func NewUser(conn net.Conn) *User {
 	return user
 }
 
-//监听当前User channel的 方法,一旦有消息，就直接发送给对端客户端, 类方法
+//监听当前User channel的 方法,一旦有消息，就直接发送给对端客户端 terminal, 类方法
 func (user *User) ListenMessage() {
 	for {
 		msg := <-user.C

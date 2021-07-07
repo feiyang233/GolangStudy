@@ -7,7 +7,7 @@ type User struct {
 	Addr string
 	C    chan string
 	conn net.Conn
-
+	// 绑定 server 好操作 server 的online map
 	server *Server
 }
 

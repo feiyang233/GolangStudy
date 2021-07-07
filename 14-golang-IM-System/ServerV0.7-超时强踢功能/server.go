@@ -92,14 +92,17 @@ func (this *Server) Handler(conn net.Conn) {
 
 	//当前handler阻塞
 	for {
-		select {
+		select { //https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/14.4.md
 		case <-isLive:
-			//当前用户是活跃的，应该重置定时器
+			//当前用户是活跃的，应该重置定时器, 重置定时器其实就是 skip 这个 select，for 循环开始一个新的
 			//不做任何事情，为了激活select，更新下面的定时器
-
-		case <-time.After(time.Second * 10):
+			t := time.Now()
+			fmt.Println("alive", t)
+		// 开始 select 的时候 time.After 就已经激活了，只是如果 isLive 的话，select 处理上面的 case，不会触发超时
+		case current_time := <-time.After(time.Second * 10):
 			//已经超时
 			//将当前的User强制的关闭
+			fmt.Println("offline", current_time)
 
 			user.SendMsg("你被踢了")
 
@@ -109,7 +112,8 @@ func (this *Server) Handler(conn net.Conn) {
 			//关闭连接
 			conn.Close()
 
-			//退出当前Handler
+			//退出当前Handler, 跳槽 for 循环
+			// https://stackoverflow.com/questions/25469682/break-out-of-select-loop
 			return //runtime.Goexit()
 		}
 	}
