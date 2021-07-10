@@ -160,15 +160,15 @@ func (client *Client) Run() {
 		case 1:
 			//公聊模式
 			client.PublicChat()
-			break
+
 		case 2:
 			//私聊模式
 			client.PrivateChat()
-			break
+
 		case 3:
 			//更新用户名
 			client.UpdateName()
-			break
+
 		}
 	}
 }
